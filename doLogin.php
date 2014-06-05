@@ -12,8 +12,8 @@ session_start();
 if (isset($_POST['username']) && isset($_POST['password'])) {
 
 //Clean de posts
-    $user = real_escape_string($_POST['username']);
-    $password = sha1(real_escape_string($_POST['password']));
+    $user = $_POST['username'];
+    $password = sha1($_POST['password']);
 	
 	// echo $password;
 	// echo $user;

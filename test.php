@@ -17,64 +17,22 @@ session_start();
 <!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
 <div class="container">
     <div class="row vertical-offset-100">
-	
-	<?php
-	$table = 'student';
-	$sql = " { call procGetColumnsPerTable ( @tableName=? ) } ";
-	$param1 = '"student"';
-	$params = array(array(&$param1, SQLSRV_PARAM_IN));
-	$stmt = sqlsrv_prepare($conn,$sql,$params);
-	
-	echo($stmt);
-	exit();
-
-	if ($stmt===false) {
-	// handle error
-	print_r(sqlsrv_errors,true);
-	}else{
-	if (sqlsrv_execute($stmt)===false) {
-	// handle error. This is where the error happens
-	print_r(sqlsrv_errors,true);
-	}
-	}
-?>
        
 	<?php
 	
 	$table = 'student';
-	$params = array($table);
 	
-	$tsql = "CALL procGetColumnsPerTable (
-	@tableName=$table
-	)";
-	//$tsql = "CALL procGetColumnsPerTable ($table);";
-	$result = sqlsrv_query( $conn, $tsql, $params);
+	//Execute procedure
+	$tsql = "EXEC procGetAllTables";
+	//Voer sql code uit
+	$result = sqlsrv_query( $conn, $tsql);
 	
-	// echo $tsql;
-	// exit();
-	
-	
-
-		
+	//Loop de resultaten
 	while($itemArray= sqlsrv_fetch_array($result,SQLSRV_FETCH_ASSOC)){	
-	$test = $itemArray['TabelNaam'];
-	
-	echo $test;
-	
+		echo  $itemArray['TabelNaam'];	
+		echo '<br/>';
 	}
 	
-	// $sql= "EXEC procGetAllTables";
-	
-	// $stmt = sqlsrv_query( $conn, $sql);
-	// if( $stmt === false ) {
-		 // die( print_r( sqlsrv_errors(), true));
-		 // }
-		 
-		 //var_dump($stmt);
-	
-
-	
-
 	?>
 </div>
 
