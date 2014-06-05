@@ -20,22 +20,18 @@ if(!isset($_SESSION['username'])){
 ?>
 
   <body>
-
-     
+  
   <?php
   include 'navbar.php';
   include 'jumbotron.php';
   ?>
 
     <div class="container">
-      <!-- Example row of columns -->
-      
+      <!-- Example row of columns -->     
 
-      <hr>
-
-      <footer>
-        <p>&copy; EMIS 2014</p>
-      </footer>
+	  <?php
+	  include 'footer.php';
+	  ?>
     </div> <!-- /container -->
 
 
