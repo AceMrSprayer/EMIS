@@ -6,10 +6,11 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>Jumbotron Template for Bootstrap</title>
+    <title>EMIS - Datacleansing</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/EMIS.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="jumbotron.css" rel="stylesheet">

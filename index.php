@@ -17,24 +17,15 @@ if(!isset($_SESSION['username'])){
 	$_SESSION['fail'] = 'U bent nog niet ingelogd';
 	header('location: login.php');	      
 }
-include 'header.php';
 ?>
-  <body>
-    <?php
-	include 'navbar.php';
-	?>
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Datacleansing Dashboard</h1>
-        <p>Data opschonen in een hand omdraai!</p>
-        
-		<div class="knoppen">
-		<!--<p><a class="btn btn-primary btn-lg" role="button">Home</a></p>-->
 
-		</div>
-      </div>
-    </div>
+  <body>
+
+     
+  <?php
+  include 'navbar.php';
+  include 'jumbotron.php';
+  ?>
 
     <div class="container">
       <!-- Example row of columns -->
