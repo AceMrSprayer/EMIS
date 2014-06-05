@@ -1,0 +1,5 @@
+http://bootsnipp.com/snippets/featured/panel-table-with-filters-per-column
+
+http://bootsnipp.com/snippets/featured/bootstrap-snipp-for-datatable
+
+Test@12314567
