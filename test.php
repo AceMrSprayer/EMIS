@@ -17,23 +17,97 @@ session_start();
 <!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
 <div class="container">
     <div class="row vertical-offset-100">
+
+    	<?php
+    		for($i = 0;$i<10; $i++){
+    			echo $i;
+    		}
+
+			$tsql_callSP = "{call procGetColumnsPerTable( ? )}";   
+
+			$tableName = 'inschrijving';  
+
+			$params = array( 
+			array($tableName,SQLSRV_PARAM_IN),              
+			);   
+
+			/* Execute the query. */  
+			$stmt3 = sqlsrv_query( $conn, $tsql_callSP, $params);   
+			echo $stmt3;
+
+			if( $stmt3 === false ) {       
+			echo "Error in executing statement 3.\n";       
+			die( print_r( sqlsrv_errors(), true)); }   
+
+			while ($obj=sqlsrv_fetch_object($stmt3)) {       
+				// SET PARAMETERS - SET TERMS      
+				echo $obj->tableName;  
+			}   
+
+			/*Free the statement and connection resources. */  
+			sqlsrv_free_stmt( $stmt3);  
+
+
+		?>
+	
+<!-- 	<?php
+	$table = 'student';
+	$sql = " { call procGetColumnsPerTable ( @tableName=? ) } ";
+	$param1 = '"student"';
+	$params = array(array(&$param1, SQLSRV_PARAM_IN));
+	$stmt = sqlsrv_prepare($conn,$sql,$params);
+	
+	echo($stmt);
+	exit();
+
+	if ($stmt===false) {
+	// handle error
+	print_r(sqlsrv_errors,true);
+	}else{
+	if (sqlsrv_execute($stmt)===false) {
+	// handle error. This is where the error happens
+	print_r(sqlsrv_errors,true);
+	}
+	}
+?> -->
        
-	<?php
+<!--	<?php
 	
 	$table = 'student';
+	$params = array($table);
 	
-	//Execute procedure
-	$tsql = "EXEC procGetAllTables";
-	//Voer sql code uit
-	$result = sqlsrv_query( $conn, $tsql);
+	$tsql = "CALL procGetColumnsPerTable (
+	@tableName=$table
+	)";
+	//$tsql = "CALL procGetColumnsPerTable ($table);";
+	$result = sqlsrv_query( $conn, $tsql, $params);
 	
-	//Loop de resultaten
+	// echo $tsql;
+	// exit();
+	
+	
+
+		
 	while($itemArray= sqlsrv_fetch_array($result,SQLSRV_FETCH_ASSOC)){	
-		echo  $itemArray['TabelNaam'];	
-		echo '<br/>';
+	$test = $itemArray['TabelNaam'];
+	
+	echo $test;
+	
 	}
 	
-	?>
+	// $sql= "EXEC procGetAllTables";
+	
+	// $stmt = sqlsrv_query( $conn, $sql);
+	// if( $stmt === false ) {
+		 // die( print_r( sqlsrv_errors(), true));
+		 // }
+		 
+		 //var_dump($stmt);
+	
+
+	
+
+	?> -->
 </div>
 
 	<!--Javascript includes!-->
