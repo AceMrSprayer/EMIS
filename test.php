@@ -19,21 +19,29 @@ session_start();
     <div class="row vertical-offset-100">
 
     	<?php
-    		for($i = 0;$i<10; $i++){
-    			echo $i;
-    		}
 
-			$tsql_callSP = "{call procGetColumnsPerTable( ? )}";   
+			//$tsql_callSP = "{call [procCheckOperators]( ? , ? , ? , ? , ? )}";   
+			$tsql_callSP = "{call [procGetParameters]( ? )}";   
 
-			$tableName = 'inschrijving';  
+			$tabel = 'procGetParameters';
+			$kolom = 'stud_nr';
+			$operator = '>';  
+			$param1 = '1000';
+			$param2 = '2000';
 
 			$params = array( 
-			array($tableName,SQLSRV_PARAM_IN),              
+				array($tabel,SQLSRV_PARAM_IN) 
+				// array($kolom,SQLSRV_PARAM_IN),
+				// array($operator,SQLSRV_PARAM_IN),
+				// array($param1,SQLSRV_PARAM_IN),
+				// array($param2,SQLSRV_PARAM_IN)             
 			);   
+
+			
 
 			/* Execute the query. */  
 			$stmt3 = sqlsrv_query( $conn, $tsql_callSP, $params);   
-			echo $stmt3;
+			var_dump($stmt3);
 
 			if( $stmt3 === false ) {       
 			echo "Error in executing statement 3.\n";       
@@ -41,13 +49,12 @@ session_start();
 
 			while ($obj=sqlsrv_fetch_object($stmt3)) {       
 				// SET PARAMETERS - SET TERMS      
-				echo $obj->tableName;  
+				echo $obj->PARAMETER_NAME;  
+				echo '</br>';
 			}   
 
 			/*Free the statement and connection resources. */  
 			sqlsrv_free_stmt( $stmt3);  
-
-
 		?>
 	
 <!-- 	<?php
