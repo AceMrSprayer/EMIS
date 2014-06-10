@@ -1,64 +1,68 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+<html lang="en">
+<?php
+	require 'dbconnect.php';
+	session_start();
+	include 'header.php'
+?>
+  
 
-        <?php
-            require 'dbconnect.php';
-        ?>
-<html xmlns="http://www.w3.org/1999/xhtml">
+  <body>
 
-<html>
-<head>
-    <rel="stylesheet" type="text/css" href="css/main.css" />
-    <meta http-equiv="content-type" content="text/php; charset=utf-8" />
+    <?php
+	include 'navbar.php';
+	include 'jumbotron.php';
+	?>    
 
-    <title>Site Template - Welcome!</title>
-</head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://templateplanet.info/tooltip.js"></script>
+<script src="http://templateplanet.info/modal.js"></script>
+<div class="container">
+	<div class="row">
+		
+        
+    <div class="col-md-8 col-md-offset-2">
+		<a data-toggle="modal" data-id="ISBN" title="Add this item" class="open-AddBookDialog btn btn-primary" href="#addBookDialog">test</a>
+		<a data-id="derp" data-toggle="modal" title="Add this item" class="open-AddBookDialog btn btn-primary" href="#addBookDialog">test</a>
 
-<body>
-<div class="Container">
-    <div class="Header">
 
-    </div>
+		<div class="modal" id="addBookDialog">
+		<div class="modal-header">
+		<button class="close" data-dismiss="modal">×</button>
+		<h3>Modal header</h3>
 
-    <div class="Body">
-        <form action="javascript:void(0);">
-            <input type="text" id="q" name="q"/>
-        </form>
-        <div class="search_item">
-            <h4 class="search_text">Item 1</h4>
-            <p>Some more info about Item 1</p>
+		</div>
+		<div class="modal-body">
+		<p>some content</p>
+		<input type="text" name="bookId" id="bookId" value="" />
+		</div>
+		</div>
+            
         </div>
-        <div class="search_item">
-            <h4 class="search_text">Item 2</h4>
-            <p>Some more info about Item 2</p>
-        </div>
-        <div class="search_item">
-            <h4 class="search_text">Item 3</h4>
-            <p>Some more info about Item 3</p>
-        </div>
-    </div>
+	</div>
+	 <?php
+	  include 'footer.php';
+	  ?>   
 </div>
 
-<script>
-    $().ready(function(){
-        // Instant Search
-        $('#q').keyup(function(){
-            $('.search_item').each(function(){
-                var re = new RegExp($('#q').val(), 'i')
-                if($(this).children('.search_text')[0].innerHTML.match(re)){
-                    $(this).show();
-                }else{
-                    $(this).hide();
-                };
-            });
-        });
-    });
-</script>
-</body>
 
-<footer>
-    <div class="Footer">
-        <b>Copyright - 2010</b>
-    </div>
-</footer>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script>
+	$(document).on("click", ".open-AddBookDialog", function (e) {
+
+    e.preventDefault();
+
+    var _self = $(this);
+
+    var myBookId = _self.data('id');
+    $("#bookId").val(myBookId);
+
+    $(_self.attr('href')).modal('show');
+});</script>
+	
+  </body>
 </html>
