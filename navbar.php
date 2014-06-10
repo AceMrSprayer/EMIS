@@ -9,7 +9,7 @@
           </button>
           <ul class="nav navbar-nav">
 		  <a class="navbar-brand" href="#">Home</a>
-		  <a class="navbar-brand" href="#">Fouten opsporen en repareren</a>
+		  <a class="navbar-brand" href="troubleshoot.php">Fouten opsporen en repareren</a>
 		  <a class="navbar-brand" href="#">Statistieken</a>
 		  <a class="navbar-brand" href="#">Filters</a>
 		  <li class="dropdown">

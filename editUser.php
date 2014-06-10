@@ -94,18 +94,15 @@
       </div>
           <div class="modal-body">
 		  <form action="delete.php" method="POST" accept-charset="utf-8" role="form">
-						
-					  <input type="text" id="bookId" value=""/>
-					 
-					
+
 					<label for="firstname">Voornaam</label>
-					<input type="text" name="firstname" value="" class="form-control input-lg editForm" placeholder="Voornaam"  required/> 						
+					<input id="firstnameElement" type="text" name="firstname" value="" class="form-control input-lg editForm" placeholder="Voornaam"  required/>
 			   
 					<label for="lastname">Achternaam</label>
-					<input type="text" name="lastname" value="" class="form-control input-lg editForm" placeholder="Achternaam"  required/>                       
+					<input id="lastnameElement" type="text" name="lastname" value="" class="form-control input-lg editForm" placeholder="Achternaam"  required/>
 					
 					<label for="email">Email adres</label>
-					<input type="email" name="email" value="" class="form-control input-lg editForm" placeholder="Email" required/>							
+					<input id="emailElement" type="email" name="email" value="" class="form-control input-lg editForm" placeholder="Email" required/>
 					
 					<label for="newUserPassword">Minimaal 8 letters, 1 hoofdletter, 1 speciaal karakter en 1 nummer.</label>
 					<input type="password" name="password" id ="newUserPassword" value="" class="form-control input-lg editForm" editForm placeholder=" Nieuw wachtwoord" required pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" />
@@ -178,21 +175,15 @@ $("#mytable #checkall").click(function () {
 </script>
 <script>
 		$(document).on("click", ".open-AddBookDialog", function () {
-		  var myBookId = $(this).data('id');
-		 $(".modal-body #bookId").val( myBookId );
-		 test(myBookId);
-		 // var trows = document.getElementById("userTable").rows;
-		 // alert(trows);
+		 var myBookId = $(this).data('id');
+         var parentElement = document.getElementById("parentElement"+myBookId);
+         var childElements = parentElement.getElementsByTagName('td');
+         for(var i = 1; i < (childElements.length-2); i++) {
+             document.getElementById("firstnameElement").value = childElements[3].innerHTML;
+             document.getElementById("lastnameElement").value = childElements[4].innerHTML;
+             document.getElementById("emailElement").value = childElements[2].innerHTML;
+         }
 	});
-	
-	function test(id) {
-		var parentElement = document.getElementById("parentElement"+id);
-		alert(parentElement.childNode[1].nodeValue);
-	}
-	//$(function test(id){
-		//var parentElement = document.getElementById("parentElement"+id);
-		//alert(parentElement.childNodes().length);
-	//});
 </script>
 </script>
   </body>
