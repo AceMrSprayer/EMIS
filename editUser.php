@@ -27,9 +27,18 @@
 			<li class="active"><a href="editUser.php">Gebruikers beheren</a></li>
 		</ul>
         <legend><b>Beheer gebruiker</b></legend>
-        <div class="table-responsive">     
+        <div class="table-responsive">  
+					<?php
+                    if(isset($_SESSION['success'])){
+                    echo '<div class="alert alert-success message-content"><b>'.$_SESSION['success'].'</b></div>';
+                    unset($_SESSION['success']);
+                    }else if(isset($_SESSION['fail'])){
+                    echo '<div class="alert alert-danger message-content"><b>'.$_SESSION['fail'].'</b></div>';
+					unset($_SESSION['fail']);
+                    }
+                ?>		
 			<label for="userTable">Beheer hier uw gebruikers.</label>
-              <table id="mytable" class="table table-bordred table-striped">                   
+              <table id="userTable" class="table table-bordred table-striped">                   
                    <thead>                   
                    <th><input type="checkbox" id="checkall" /></th>
                    <th>#</th>
@@ -55,14 +64,14 @@
 		
 		echo'
 		
-		<tr>
+		<tr id="parentElement'.$id.'">
 		<td><input type="checkbox" class="checkthis" /></td>	
 		<td>'.$id.'</td>
 		<td>'.$email.'</td>
 		<td>'.$firstname.'</td>
 		<td>'.$lastname.'</td>
-		<td><p><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-		<td><p><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+		<td><p><button data-id="'.$id.'" class="btn btn-primary btn-xs open-AddBookDialog" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+		<td><p><button data-id="'.$id.'" class="btn btn-danger btn-xs open-deleteDialog" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
 		</tr>  
 		
 		';
@@ -89,60 +98,67 @@
 	  
     <div class="modal-content">
           <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&#215;</button>
         <h4 class="modal-title custom_align" id="Heading">Bewerk gebruiker</h4>
       </div>
           <div class="modal-body">
-          <div class="form-group">
-		  <?php
-		  $test = 'herp';
-		  ?>
-        <input class="form-control " type="text" placeholder="Mohsin" value="<?php echo $test; ?>">
-        </div>
-        <div class="form-group">
-        
-        <input class="form-control " type="text" placeholder="Irshad">
-        </div>
-        <div class="form-group">
-        <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
-    
-        
-        </div>
-      </div>
-          <div class="modal-footer ">
-        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
-      </div>
+		  <form action="doUpdateUser.php" method="POST" accept-charset="utf-8" role="form">
+		  
+					<?	$test = 'win';	?>
+					
+					<input type="hidden" id="bookId" value=""/>					 
+					
+					<label for="firstname">Voornaam</label>
+					<input type="text" name="firstname"  id="firstnameElement" value="" class="form-control input-lg editForm" placeholder="Voornaam"  required/> 						
+			   
+					<label for="lastname">Achternaam</label>
+					<input type="text" name="lastname" id="lastnameElement" value="" class="form-control input-lg editForm" placeholder="Achternaam"  required/>                       
+					
+					<label for="email">Email adres</label>
+					<input type="email" name="email" id="emailElement" value="" class="form-control input-lg editForm" placeholder="Email" required/>							
+					
+					<label for="newUserPassword">Minimaal 8 letters, 1 hoofdletter, 1 speciaal karakter en 1 nummer.</label>
+					<input type="password" name="password" id ="newUserPassword" value="" class="form-control input-lg editForm" editForm placeholder=" Nieuw wachtwoord" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" />
+												
+					<label for="confirm password">Bevestig wachtwoord</label>
+					<input type="password" name="confirm_password" value="" class="form-control input-lg editForm" placeholder="Bevestig wachtwoord" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" />  
+						   
+					</div>
+					<div class="modal-footer ">
+					<button type="submit" class="btn btn-warning" style="width:100%"><span class="glyphicon glyphicon-ok-sign"></span> &nbsp; Update</button>
+					</div>
+				</div>					
+		  </form>     
         </div>
     <!-- /.modal-content --> 
   </div>
       <!-- /.modal-dialog --> 
-    </div>
-    
-    
+    </div>    
     
     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
       <div class="modal-dialog">
     <div class="modal-content">
-          <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&#215;</button>
+        <h4 class="modal-title custom_align" id="Heading">Verwijder dit record.</h4>
       </div>
           <div class="modal-body">
        
-       <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
+       <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span>Weet u zeker dat u dit record wilt verwijderen?</div>
        
       </div>
         <div class="modal-footer ">
-			<form action="delete.php" method="POST" accept-charset="utf-8" role="form">
-			<button type="button" class="btn btn-warning" ><span class="glyphicon-ok-sign"></span>Yes</button>
+			<form action="doDeleteUser.php" method="POST" accept-charset="utf-8" role="form">		
+			 <input type="hidden" name="bookID" id="bookId" value=""/>				 	
+			 <button type="submit" class="btn btn-warning">Ja</button>
+			 <button type="button" data-dismiss="modal" class="btn btn-warning">Nee</button>
 			</form>
-			<button type="button" class="btn btn-warning" ><span class="glyphicon glyphicon-remove"></span> No</button>
-      </div>
         </div>
     <!-- /.modal-content --> 
   </div>
       <!-- /.modal-dialog --> 
     </div>
+	</div>
 
 
     <!-- Bootstrap core JavaScript
@@ -156,6 +172,7 @@ $("#mytable #checkall").click(function () {
         if ($("#mytable #checkall").is(':checked')) {
             $("#mytable input[type=checkbox]").each(function () {
                 $(this).prop("checked", true);
+				$
             });
 
         } else {
@@ -168,6 +185,25 @@ $("#mytable #checkall").click(function () {
  $(function () {
             $("[rel='tooltip']").tooltip();
         });
+</script>
+<script>
+	
+	$(document).on("click", ".open-AddBookDialog", function () {
+	    var myBookId = $(this).data('id');
+        var parentElement = document.getElementById("parentElement"+myBookId);
+        var childElements = parentElement.getElementsByTagName('td');
+        for(var i = 1; i < (childElements.length-2); i++) {
+            document.getElementById("firstnameElement").value = childElements[3].innerHTML;
+            document.getElementById("lastnameElement").value = childElements[4].innerHTML;
+            document.getElementById("emailElement").value = childElements[2].innerHTML;
+        }
+	});	
+	
+	$(document).on("click", ".open-deleteDialog", function () {
+				var myBookId = $(this).data('id');
+				$(".modal-footer #bookId").val( myBookId );			
+		});	
+		
 </script>
   </body>
 </html>

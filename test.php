@@ -5,11 +5,12 @@
  * Date: 4-6-14
  * Time: 0:41
  */
-
+session_start();
 ob_start();
 require 'header.php';
 require 'dbconnect.php';
-session_start();
+
+
  ?>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,49 +21,27 @@ session_start();
 
     	<?php
 
-			$tsql_callSP = "{call [procCheckOperators]( ? , ? , ? , ? , ? )}";   
-			//$tsql_callSP = "{call [procGetParameters]( ? )}";   
+			$tsql_callSP = "{call dbo.procCheckOperators( ? , ? , ? , ? , ? )}";
 
-			$tabel = 'Student';
-			$kolom = 'stud_nr';
+			$tabel = 'docent';
+			$kolom = 'gebdat';
 			$operator = '>';  
-			$param1 = '1000';
-			$param2 = '2000';
+			$param1 = '2000';
+			$param2 = '0';
 
-			// $params = array( 
-			// 	array($tabel,SQLSRV_PARAM_IN), 
-			// 	array($kolom,SQLSRV_PARAM_IN),
-			// 	array($operator,SQLSRV_PARAM_IN),
-			// 	array($param1,SQLSRV_PARAM_IN),
-			// 	array($param2,SQLSRV_PARAM_IN)             
-			// );   
-
-			$params = array();
-			array_push($params, $tabel);
-			array_push($params, $kolom);
-			array_push($params, $operator);
-			array_push($params, $param1);
-			array_push($params, $param2);
-
-			
-
-			$paramTest = array();
-
-			for($i = 0; $i < count($params); $i++){
-				array_push($paramTest, array($params[$i],SQLSRV_PARAM_IN));
-			}
-
-			// array_push($paramTest, array($tabel,SQLSRV_PARAM_IN));
-			// array_push($paramTest, array($kolom,SQLSRV_PARAM_IN));
-			// array_push($paramTest, array($operator,SQLSRV_PARAM_IN));
-			// array_push($paramTest, array($param1,SQLSRV_PARAM_IN));
-			// array_push($paramTest, array($param2,SQLSRV_PARAM_IN));
+			$params = array(
+				array($tabel,SQLSRV_PARAM_IN),
+				array($kolom,SQLSRV_PARAM_IN),
+				array($operator,SQLSRV_PARAM_IN),
+				array($param1,SQLSRV_PARAM_IN),
+				array($param2,SQLSRV_PARAM_IN)
+			);   
 
 			
 
 			/* Execute the query. */  
-			$stmt3 = sqlsrv_query( $conn, $tsql_callSP, $paramTest);   
-			var_dump($stmt3);
+			$stmt3 = sqlsrv_query( $conn, $tsql_callSP, $params);   
+			//var_dump($stmt3);
 
 			if( $stmt3 === false ) {       
 			echo "Error in executing statement 3.\n";       
@@ -70,7 +49,7 @@ session_start();
 
 			while ($obj=sqlsrv_fetch_object($stmt3)) {       
 				// SET PARAMETERS - SET TERMS      
-				echo $obj->fnaam;  
+				echo $obj->doc_nr;
 				echo '</br>';
 			}   
 
