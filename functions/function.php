@@ -10,14 +10,13 @@
 class functions {
     function callStoredProcedure($proc, $param1, $param2, $param3, $param4, $param5) {
         $paramList = $this->getProcParams($proc);
-
+        $givenParams = array($param1, $param2, $param3, $param4, $param5);
         $params = array();
 
         $tsql_callSP = "{call ".$proc."(";
 
-
         for($i = 0; $i < count($paramList); $i++) {
-            array_push($params, array('$param'.$i, SQLSRV_PARAM_IN));
+            array_push($params, array($givenParams[$i], SQLSRV_PARAM_IN));
             $tsql_callSP = $tsql_callSP." ? ";
 
             if($i != count($paramList)) {
@@ -48,7 +47,7 @@ class functions {
     function callSP($tsql_callSP, $params) {
         require("dbconnect.php");
 
-        /* Execute the Query */
+        // Execute the Query
         $stmt3 = sqlsrv_query($conn, $tsql_callSP, $params);
 
         if( $stmt3 === false ) {
