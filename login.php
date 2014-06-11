@@ -7,12 +7,12 @@
  */
 
 ob_start();
-require 'header.php';
-require 'dbconnect.php';
+require '../../header.php';
+require '../dbconnect.php';
 session_start();
 if(isset($_SESSION['username'])){
     $_SESSION['success'] = "Welkom terug.";
-    header('location: index.php');
+    header('location: ../../index.php');
 }
  ?>
 <!DOCTYPE HTML>
@@ -32,7 +32,7 @@ if(isset($_SESSION['username'])){
                     <h3 class="panel-title">Please sign in</h3>
                 </div>
                 <div class="panel-body">
-                    <form accept-charset="UTF-8" method="POST" role="form" action="doLogin.php">
+                    <form accept-charset="UTF-8" method="POST" role="form" action="content/user/doLogin.php">
                         <fieldset>
                             <div class="form-group">
                                 <input class="form-control" placeholder="E-mail" name="username" type="text" required>
@@ -69,7 +69,7 @@ if(isset($_SESSION['username'])){
 
 	<!--Javascript includes!-->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-	<script src="js/bootstrap.js"></script>
+	<script src="files/js/bootstrap.js"></script>
 <script>
 $(document).ready(function(){
 $(document).mousemove(function(e){

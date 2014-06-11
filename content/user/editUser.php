@@ -3,7 +3,7 @@
 <?php
 	require 'dbconnect.php';
 	session_start();
-	include 'header.php'
+include 'header.php'
 ?>
   
 
@@ -23,7 +23,7 @@
         
     <div class="col-md-8 col-md-offset-2">
 		<ul class="nav nav-tabs usernav">
-			<li><a href="newUser.php">Gebruiker toevoegen</a></li>
+			<li><a href="../../newUser.php">Gebruiker toevoegen</a></li>
 			<li class="active"><a href="editUser.php">Gebruikers beheren</a></li>
 		</ul>
         <legend><b>Beheer gebruiker</b></legend>
@@ -148,7 +148,7 @@
        
       </div>
         <div class="modal-footer ">
-			<form action="doDeleteUser.php" method="POST" accept-charset="utf-8" role="form">		
+			<form action="doDeleteUser.php" method="POST" accept-charset="utf-8" role="form">
 			 <input type="hidden" name="bookID" id="bookId" value=""/>				 	
 			 <button type="submit" class="btn btn-warning">Ja</button>
 			 <button type="button" data-dismiss="modal" class="btn btn-warning">Nee</button>
@@ -165,7 +165,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../../files/js/bootstrap.min.js"></script>
 	<script>
 	$(document).ready(function(){
 $("#mytable #checkall").click(function () {

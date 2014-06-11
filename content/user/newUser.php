@@ -19,7 +19,7 @@
 				  <li class="active"><a href="newUser.php">Gebruiker toevoegen</a></li>
 				  <li><a href="editUser.php">Gebruiker aanpassen</a></li>
 				  </ul>
-            <form action="doNewUser.php" method="POST" accept-charset="utf-8" class="newUserForm" role="form">   
+            <form action="doNewUser.php" method="POST" accept-charset="utf-8" class="newUserForm" role="form">
 			<legend><b>Nieuwe gebruiker</b></legend>
                     <h4>Vul hieronder de gegevens in.</h4>
 					
@@ -69,6 +69,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../../files/js/bootstrap.min.js"></script>
   </body>
 </html>

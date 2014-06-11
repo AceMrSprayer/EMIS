@@ -300,7 +300,7 @@ More detail and specific examples can be found in the included HTML file.
 				plot.insertLegend();
 			}
 			
-			// we're actually done at this point, just defining internal functions at this point
+			// we're actually done at this point, just defining internal classes at this point
 			
 			function clear()
 			{
@@ -509,7 +509,7 @@ More detail and specific examples can be found in the included HTML file.
 			}
 		}
 		
-		//-- Additional Interactive related functions --
+		//-- Additional Interactive related classes --
 		
 		function isPointInPoly(poly, pt)
 		{
