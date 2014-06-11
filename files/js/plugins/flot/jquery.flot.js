@@ -156,7 +156,7 @@
         },
         plot = this;
 
-        // public functions
+        // public classes
         plot.setData = setData;
         plot.setupGrid = setupGrid;
         plot.draw = draw;
@@ -811,7 +811,7 @@
         }
 
         function setTransformationHelpers(axis) {
-            // set helper functions on the axis, assumes plot area
+            // set helper classes on the axis, assumes plot area
             // has been computed already
             
             function identity(x) { return x; }

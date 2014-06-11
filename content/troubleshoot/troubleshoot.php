@@ -5,7 +5,7 @@ require 'dbconnect.php';
 session_start();
 include 'header.php';
 
-include_once("functions/function.php");
+include_once("files/classes/function.php");
 $functions = new functions();
 ?>
 
@@ -17,9 +17,6 @@ include 'navbar.php';
 include 'jumbotron.php';
 ?>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="http://templateplanet.info/tooltip.js"></script>
-<script src="http://templateplanet.info/modal.js"></script>
 <div class="container">
     <div class="row">
         <legend>
@@ -36,8 +33,7 @@ include 'jumbotron.php';
                 printf('<tr><td onClick="makeRequest(\'%s\');">%s</td></tr> ', $value, $value);
             }
             ?>
-        </table>
-    </div>
+        </table>    </div>
     <div id="placeholderProcedureCalls" class="row">
         <!-- Placeholder for switchable content of procedure calls -->
     </div>
@@ -48,7 +44,7 @@ include 'jumbotron.php';
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="../../files/js/bootstrap.min.js"></script>
 <script>
 
     /* Request XMLHttp */
